@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ocean Breeze – Nuevo Nayarit</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;400;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --primary:   #0B2438;
+      --primary-md:#0C2C46;
+      --primary-lt:#154062;
+      --accent:    #73AFDE;
+      --gold:      #C9A96E;
+      --sand:      #FFE6C9;
+      --white:     #ffffff;
+      --gray:      #647696;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f9f7f4;
+      color: var(--primary);
+      line-height: 1.7;
+    }
+
+    /* ── HEADER ── */
+    header {
+      position: fixed; top: 0; left: 0; width: 100%; z-index: 100;
+      background: #cbe8ee;
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(11,36,56,0.08);
+    }
+    .header-inner {
+      max-width: 1200px; margin: 0 auto;
+      padding: 1rem 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem; font-weight: 600;
+      color: var(--primary); letter-spacing: 0.5px;
+      display: flex; align-items: center; gap: 0.4rem;
+    }
+    .logo span { color: var(--accent); }
+    nav { display: flex; gap: 2rem; }
+    nav a {
+      text-decoration: none; font-size: 0.8rem; font-weight: 500;
+      color: var(--primary-lt); text-transform: uppercase; letter-spacing: 1px;
+      transition: color 0.2s;
+    }
+    nav a:hover { color: var(--accent); }
+    .btn {
+      display: inline-block; padding: 0.55rem 1.4rem;
+      border-radius: 3px; font-size: 0.8rem; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 1px;
+      cursor: pointer; transition: all 0.2s; text-decoration: none;
+    }
+    .btn-primary {
+      background: var(--primary); color: var(--white);
+      border: 1px solid var(--primary);
+    }
+    .btn-primary:hover { background: var(--primary-lt); }
+    .btn-gold {
+      background: var(--gold); color: var(--white);
+      border: 1px solid var(--gold);
+    }
+    .btn-gold:hover { background: #b8924a; }
+    .btn-outline {
+      background: transparent; color: var(--white);
+      border: 1px solid rgba(255,255,255,0.6);
+    }
+    .btn-outline:hover { background: rgba(255,255,255,0.15); }
+
+    /* ── HERO ── */
+    .hero {
+      margin-top: 70px;
+      position: relative; height: 90vh; min-height: 560px;
+      background: linear-gradient(160deg, var(--primary) 0%, #1a4a72 60%, #2a7abf 100%);
+      overflow: hidden;
+      display: flex; align-items: flex-end;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background-image:
+        radial-gradient(ellipse 60% 50% at 70% 40%, rgba(115,175,222,0.25) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 60% at 20% 80%, rgba(201,169,110,0.12) 0%, transparent 60%);
+      /* Decorative wave shapes */
+    }
+    .hero-waves {
+      position: absolute; bottom: 0; left: 0; right: 0; height: 220px;
+      opacity: 0.12;
+    }
+    .hero-content {
+      position: relative; z-index: 2;
+      max-width: 1200px; margin: 0 auto; width: 100%;
+      padding: 0 2rem 5rem;
+    }
+    .hero-eyebrow {
+      font-size: 0.75rem; font-weight: 500; letter-spacing: 3px;
+      text-transform: uppercase; color: var(--accent);
+      margin-bottom: 1rem;
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 300; color: var(--white);
+      line-height: 1.1; max-width: 700px;
+      margin-bottom: 1.5rem;
+    }
+    .hero h1 em { font-style: italic; color: var(--accent); }
+    .hero p {
+      color: rgba(255,255,255,0.75); max-width: 500px;
+      font-size: 1rem; margin-bottom: 2rem;
+    }
+    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+    /* ── BOOKING BAR ── */
+    .booking-bar {
+      background: var(--white);
+      box-shadow: 0 8px 30px rgba(11,36,56,0.12);
+      border-radius: 6px;
+      max-width: 1100px; margin: -2rem auto 0;
+      position: relative; z-index: 10;
+      padding: 1.5rem 2rem;
+      display: grid; grid-template-columns: 1fr 1fr 1fr auto;
+      gap: 1rem; align-items: end;
+    }
+    .booking-field label {
+      display: block; font-size: 0.7rem; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 1px;
+      color: var(--gray); margin-bottom: 0.4rem;
+    }
+    .booking-field input, .booking-field select {
+      width: 100%; padding: 0.6rem 0.8rem;
+      border: 1px solid rgba(11,36,56,0.2);
+      border-radius: 4px; font-size: 0.9rem;
+      font-family: 'Inter', sans-serif;
+      color: var(--primary); background: #f9f7f4;
+      outline: none;
+    }
+    .booking-field input:focus, .booking-field select:focus {
+      border-color: var(--accent);
+    }
+
+    /* ── SECTION WRAPPER ── */
+    .section { padding: 5rem 2rem; }
+    .container { max-width: 1200px; margin: 0 auto; }
+    .section-label {
+      font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase;
+      color: var(--accent); font-weight: 600; margin-bottom: 0.75rem;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 300; color: var(--primary);
+      line-height: 1.2; margin-bottom: 1rem;
+    }
+    .section-rule {
+      width: 48px; height: 2px; background: var(--accent);
+      margin: 1.25rem 0;
+    }
+    .section-sub {
+      color: var(--gray); max-width: 560px; font-size: 1rem;
+    }
+
+    /* ── INTRO (river block) ── */
+    .intro { background: #cbe8ee; }
+    .intro-grid {
+      display: grid; grid-template-columns: 3fr 2fr;
+      gap: 5rem; align-items: center;
+    }
+    .intro-img {
+      border-radius: 4px; overflow: hidden;
+      aspect-ratio: 4/3; position: relative;
+    }
+    .intro-img-placeholder {
+      width: 100%; height: 100%;
+      background: linear-gradient(135deg, #1a4a72 0%, #2a7abf 50%, #73AFDE 100%);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .pool-svg { width: 80%; opacity: 0.35; }
+
+    /* ── AMENITIES CARDS ── */
+    .amenities { background: var(--white); }
+    .cards-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 2rem; margin-top: 3rem;
+    }
+    .card {
+      border: 1px solid rgba(11,36,56,0.08);
+      border-radius: 6px; overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(11,36,56,0.1);
+    }
+    .card-img {
+      height: 180px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 3rem;
+    }
+    .card-img.pool  { background: linear-gradient(135deg, #1a4a72, #73AFDE); }
+    .card-img.golf  { background: linear-gradient(135deg, #2d6a4f, #52b788); }
+    .card-img.spa   { background: linear-gradient(135deg, #6b4226, #c9a96e); }
+    .card-body { padding: 1.5rem; }
+    .card-body h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem; font-weight: 600;
+      color: var(--primary); margin-bottom: 0.5rem;
+    }
+    .card-body p { color: var(--gray); font-size: 0.9rem; line-height: 1.6; }
+
+    /* ── TESTIMONIAL ── */
+    .testimonial-section {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-md) 100%);
+      color: var(--white); text-align: center;
+    }
+    .testimonial-section .section-title { color: var(--white); }
+    blockquote {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem; font-weight: 300; font-style: italic;
+      color: rgba(255,255,255,0.9); max-width: 700px;
+      margin: 2rem auto 1rem; line-height: 1.6;
+    }
+    .quote-author { color: var(--accent); font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: linear-gradient(to right, var(--primary), var(--primary-md));
+      color: var(--white);
+    }
+    .footer-main {
+      max-width: 1200px; margin: 0 auto;
+      padding: 3.5rem 2rem 2rem;
+      display: flex; justify-content: space-between;
+      gap: 3rem; flex-wrap: wrap;
+    }
+    .footer-brand .logo { color: var(--white); margin-bottom: 1rem; }
+    .footer-brand p { color: rgba(255,255,255,0.5); font-size: 0.85rem; max-width: 240px; }
+    .footer-links h4 {
+      font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 1rem;
+    }
+    .footer-links a {
+      display: block; text-decoration: none;
+      color: rgba(255,255,255,0.65); font-size: 0.85rem;
+      margin-bottom: 0.5rem; transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--white); }
+    .footer-contact a {
+      display: flex; align-items: center; gap: 0.5rem;
+      text-decoration: none; color: rgba(255,255,255,0.65);
+      font-size: 0.85rem; margin-bottom: 0.75rem; transition: color 0.2s;
+    }
+    .footer-contact a:hover { color: var(--white); }
+    .footer-bottom {
+      background: #061F33;
+      padding: 1rem 2rem; text-align: center;
+      font-size: 0.75rem; color: rgba(255,255,255,0.35);
+      display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;
+    }
+    .footer-bottom a { color: rgba(255,255,255,0.35); text-decoration: none; }
+    .footer-bottom a:hover { color: rgba(255,255,255,0.6); }
+
+    @media (max-width: 900px) {
+      .intro-grid { grid-template-columns: 1fr; }
+      .cards-grid  { grid-template-columns: 1fr; }
+      .booking-bar { grid-template-columns: 1fr 1fr; }
+      nav { display: none; }
+    }
+  </style>
+
+  <!-- ═══════════════════════════════════════════
+       CXone Chat Widget — replace BU number below
+  ════════════════════════════════════════════ -->
+  <script>
+    (function(n,u){
+      window.CXoneDfo=n,
+      window[n]=window[n]||function(){(window[n].q=window[n].q||[]).push(arguments)},
+      window[n].u=u;
+      var e=document.createElement("script");
+      e.type="module";
+      e.src=u+"?"+Math.round(Date.now()/1e3/3600);
+      document.head.appendChild(e);
+    })('cxone','https://web-modules-de-na1.niceincontact.com/loader/1/loader.js');
+
+    cxone('init', '5748'); // ← replace
+    cxone('guide','init');
+
+    // cxone('guide', 'init', { locale: 'es-US' });
+    // cxone('chat', 'setLocale', 'es-US');
+
+    
+    cxone('chat', 'hideAssignedAgent');
+    cxone('chat', 'enableCloseIcon', true);
+
+    cxone('chat', 'hideAssignedAgent');
+    cxone('chat', 'enableCloseIcon', true);
+    cxone('chat', 'setCustomerName', 'Kurtis Blow');
+    cxone('chat', 'setContactCustomField', 'email', 'kblow@email.com');
+    cxone('chat', 'setContactCustomField', 'phone', '4801231234');
+    cxone('chat', 'setContactCustomField', 'new_lang', 'en-US');
+    cxone('guide', 'setDesiredGuideWidth', '400px');
+    cxone('guide', 'setDesiredGuideHeight', '600px');
+    cxone('guide', 'setButtonSize', '70px');
+
+    setTimeout(() => {
+    cxone('chat', 'setCustomCss', `
+        [data-selector="HEADER"] {
+            background-image: url(https://oceanbreezehotels.com/_next/static/media/logo.ab8960f6.svg) !important;
+            background-repeat: no-repeat !important;
+            background-size: 20% !important;
+            background-position: left 10px center !important;
+            height: 80px !important;
+        }
+    `);
+}, 1000);
+
+
+    setTimeout(() => {
+      const s = document.createElement('style');
+      s.innerHTML = `
+        #cxone-guide-container [data-selector="GUIDE_CHANNEL_BUTTON"]:focus,
+        #cxone-guide-container [data-selector="GUIDE_CHANNEL_BUTTON"]:focus-visible {
+          outline-color: #cbe8ee !important;
+          outline-width: 0.1em !important;
+          outline-style: solid !important;
+          outline-offset: 0px !important;
+        }
+      `;
+      document.head.appendChild(s);
+    }, 1000);
+  </script>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="header-inner">
+      <div class="logo">Ocean<span>Breeze</span></div>
+      <nav>
+        <a href="#">Nuevo Nayarit</a>
+        <a href="#">Rooms</a>
+        <a href="#">Experiences</a>
+        <a href="#">Dining</a>
+        <a href="#">Contact</a>
+      </nav>
+      <a href="#" class="btn btn-primary">Book Now</a>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <svg class="hero-waves" viewBox="0 0 1440 220" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+      <path fill="white" d="M0,96L48,106.7C96,117,192,139,288,138.7C384,139,480,117,576,106.7C672,96,768,96,864,117.3C960,139,1056,181,1152,181.3C1248,181,1344,139,1392,117.3L1440,96L1440,220L0,220Z"/>
+      <path fill="white" opacity="0.5" d="M0,160L60,149.3C120,139,240,117,360,128C480,139,600,181,720,181.3C840,181,960,139,1080,122.7C1200,107,1320,117,1380,122.7L1440,128L1440,220L0,220Z"/>
+    </svg>
+    <div class="hero-content">
+      <p class="hero-eyebrow">Nuevo Nayarit, Mexico</p>
+      <h1>Where the <em>ocean</em> meets your every desire</h1>
+      <p>Ocean-view pools, championship golf, world-class spa, and warm genuine hospitality — all in one breathtaking destination.</p>
+      <div class="hero-actions">
+        <a href="#" class="btn btn-gold">Explore Packages</a>
+        <a href="#" class="btn btn-outline">View Rooms</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- BOOKING BAR -->
+  <div class="booking-bar" style="margin-left:auto;margin-right:auto;margin-bottom:4rem;">
+    <div class="booking-field">
+      <label>Check In</label>
+      <input type="date">
+    </div>
+    <div class="booking-field">
+      <label>Check Out</label>
+      <input type="date">
+    </div>
+    <div class="booking-field">
+      <label>Guests</label>
+      <select>
+        <option>1 Adult</option>
+        <option>2 Adults</option>
+        <option>2 Adults, 1 Child</option>
+        <option>2 Adults, 2 Children</option>
+      </select>
+    </div>
+    <button class="btn btn-primary" style="height:42px;white-space:nowrap;">Check Availability</button>
+  </div>
+
+  <!-- INTRO / RIVER BLOCK -->
+  <section class="section intro">
+    <div class="container intro-grid">
+      <div>
+        <p class="section-label">Nuevo Nayarit</p>
+        <h2 class="section-title">Fun and relaxation for the whole family</h2>
+        <div class="section-rule"></div>
+        <p class="section-sub">Experience a vacation full of joy in a relaxed, welcoming setting. Enjoy ocean‑view pools, access to golf courses, and entertainment the whole family will treasure forever.</p>
+        <div style="margin-top:2rem;display:flex;gap:1rem;flex-wrap:wrap;">
+          <a href="#" class="btn btn-primary">Learn More</a>
+          <a href="#" class="btn" style="border:1px solid var(--primary);color:var(--primary);">Virtual Tour</a>
+        </div>
+      </div>
+      <div class="intro-img">
+        <div class="intro-img-placeholder">
+          <!-- Simple SVG pool scene placeholder -->
+          <svg class="pool-svg" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+            <ellipse cx="200" cy="200" rx="160" ry="60" fill="rgba(255,255,255,0.15)" stroke="rgba(255,255,255,0.4)" stroke-width="2"/>
+            <ellipse cx="200" cy="190" rx="140" ry="50" fill="rgba(115,175,222,0.3)" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+            <rect x="100" y="60" width="80" height="140" rx="4" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+            <rect x="220" y="80" width="80" height="120" rx="4" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+            <circle cx="200" cy="55" r="35" fill="rgba(201,169,110,0.25)" stroke="rgba(201,169,110,0.5)" stroke-width="1"/>
+            <text x="200" y="62" text-anchor="middle" fill="rgba(255,255,255,0.6)" font-size="28">🌴</text>
+            <text x="140" y="170" text-anchor="middle" fill="rgba(255,255,255,0.4)" font-size="20">🏊</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AMENITY CARDS -->
+  <section class="section amenities">
+    <div class="container">
+      <p class="section-label" style="text-align:center;">What Awaits You</p>
+      <h2 class="section-title" style="text-align:center;margin:0 auto;">Discover the joy of vacationing in harmony</h2>
+      <div class="cards-grid">
+        <div class="card">
+          <div class="card-img pool">🏊‍♂️</div>
+          <div class="card-body">
+            <h3>Ocean-View Pools</h3>
+            <p>Drift into relaxation with stunning panoramic views of the Pacific in our multi-level infinity pools, open year-round.</p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-img golf">⛳</div>
+          <div class="card-body">
+            <h3>Championship Golf</h3>
+            <p>Play world-class fairways designed by legendary architects, set against breathtaking coastal landscapes.</p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-img spa">💆‍♀️</div>
+          <div class="card-body">
+            <h3>Wellness & Spa</h3>
+            <p>Indulge in holistic treatments inspired by ancient Mexican traditions, tailored to restore mind, body, and spirit.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIAL -->
+  <section class="section testimonial-section">
+    <div class="container" style="text-align:center;">
+      <p class="section-label" style="color:var(--accent);">Guest Experiences</p>
+      <h2 class="section-title" style="color:white;margin:0 auto;">What our guests say</h2>
+      <blockquote>"The warmth of the staff, the beauty of the pools, and the sound of the ocean at night — Ocean Breeze isn't just a hotel, it's a feeling you carry home with you."</blockquote>
+      <p class="quote-author">— Sarah M., verified guest</p>
+      <div style="margin-top:2.5rem;">
+        <a href="#" class="btn btn-gold">Read More Reviews</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-main">
+      <div class="footer-brand">
+        <div class="logo" style="color:white;">Ocean<span>Breeze</span></div>
+        <p style="margin-top:0.75rem;">An authentic seaside getaway in Mexico's most beautiful destinations.</p>
+      </div>
+      <div class="footer-links">
+        <h4>Explore</h4>
+        <a href="#">Nuevo Nayarit</a>
+        <a href="#">Rooms & Suites</a>
+        <a href="#">Dining</a>
+        <a href="#">Experiences</a>
+        <a href="#">Special Offers</a>
+      </div>
+      <div class="footer-links">
+        <h4>Support</h4>
+        <a href="#">Contact Us</a>
+        <a href="#">FAQs</a>
+        <a href="#">Reservations</a>
+        <a href="#">Cancellation Policy</a>
+      </div>
+      <div class="footer-contact">
+        <h4 style="font-size:0.7rem;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:1rem;">Contact</h4>
+        <a href="tel:18772822115">📞 1-877-282-2115</a>
+        <a href="mailto:customerservice@oceanbreezehotels.com">✉️ customerservice@oceanbreezehotels.com</a>
+        <a href="#">📍 Nuevo Nayarit, Mexico</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms &amp; Conditions</a>
+      <span>© 2026 Ocean Breeze Hotels. All rights reserved.</span>
+    </div>
+  </footer>
+
+</body>
+</html>
