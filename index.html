@@ -331,12 +331,17 @@
 setTimeout(() => {
   const s = document.createElement('style');
   s.innerHTML = `
-    /* Move the chat frame up */
+    /* Hide the rogue standalone BE frame — Guide manages its own popup */
     #be-frame {
-      bottom: 220px !important;
+      display: none !important;
     }
 
-    /* Move the guide button up */
+    /* Move the Guide popup window up */
+    #cxone-guide-container .pcontainer {
+      --popup-offset-y: 220px !important;
+    }
+
+    /* Move the Guide button up */
     #cxone-guide-container .guide-container {
       --be-offset-y: 170px !important;
     }
