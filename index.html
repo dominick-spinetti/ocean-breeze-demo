@@ -328,12 +328,20 @@
 }, 1000);
 
 
-    setTimeout(() => {
+setTimeout(() => {
   const s = document.createElement('style');
   s.innerHTML = `
+    /* Move the chat frame up */
+    #be-frame {
+      bottom: 220px !important;
+    }
+
+    /* Move the guide button up */
     #cxone-guide-container .guide-container {
       --be-offset-y: 170px !important;
     }
+
+    /* Focus outline fix */
     #cxone-guide-container [data-selector="GUIDE_CHANNEL_BUTTON"]:focus,
     #cxone-guide-container [data-selector="GUIDE_CHANNEL_BUTTON"]:focus-visible {
       outline-color: #26587f !important;
