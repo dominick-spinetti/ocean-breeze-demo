@@ -310,6 +310,7 @@
     cxone('guide', 'setButtonSize', '70px');
 
     cxone('guide', 'setOffsetY', '150px');
+    cxone('chat', 'setOffsetY', '200px');
 
     setTimeout(() => {
     cxone('chat', 'setCustomCss', `
@@ -331,11 +332,6 @@
 setTimeout(() => {
   const s = document.createElement('style');
   s.innerHTML = `
-
-    /* Move the Guide popup window up */
-    #cxone-guide-container .pcontainer {
-      --popup-offset-y: 220px !important;
-    }
 
 
     /* Focus outline fix */
