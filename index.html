@@ -309,7 +309,7 @@
     cxone('guide', 'setDesiredGuideHeight', '600px');
     cxone('guide', 'setButtonSize', '70px');
 
-    cxone('chat', 'setOffsetY', '170');
+    cxone('guide', 'setOffsetY', '150px');
 
     setTimeout(() => {
     cxone('chat', 'setCustomCss', `
@@ -331,20 +331,12 @@
 setTimeout(() => {
   const s = document.createElement('style');
   s.innerHTML = `
-    /* Hide the rogue standalone BE frame — Guide manages its own popup */
-    #be-frame {
-      display: none !important;
-    }
 
     /* Move the Guide popup window up */
     #cxone-guide-container .pcontainer {
       --popup-offset-y: 220px !important;
     }
 
-    /* Move the Guide button up */
-    #cxone-guide-container .guide-container {
-      --be-offset-y: 170px !important;
-    }
 
     /* Focus outline fix */
     #cxone-guide-container [data-selector="GUIDE_CHANNEL_BUTTON"]:focus,
