@@ -329,18 +329,22 @@
 
 
     setTimeout(() => {
-      const s = document.createElement('style');
-      s.innerHTML = `
-        #cxone-guide-container [data-selector="GUIDE_CHANNEL_BUTTON"]:focus,
-        #cxone-guide-container [data-selector="GUIDE_CHANNEL_BUTTON"]:focus-visible {
-          outline-color: #26587f !important;
-          outline-width: 0.2em !important;
-          outline-style: solid !important;
-          outline-offset: 0px !important;
-        }
-      `;
-      document.head.appendChild(s);
-    }, 1000);
+  const s = document.createElement('style');
+  s.innerHTML = `
+    #cxone-guide-container .guide-container {
+      --be-offset-y: 170px !important;
+    }
+    #cxone-guide-container [data-selector="GUIDE_CHANNEL_BUTTON"]:focus,
+    #cxone-guide-container [data-selector="GUIDE_CHANNEL_BUTTON"]:focus-visible {
+      outline-color: #26587f !important;
+      outline-width: 0.2em !important;
+      outline-style: solid !important;
+      outline-offset: 0px !important;
+    }
+  `;
+  document.head.appendChild(s);
+}, 1000);
+    
   </script>
 </head>
 <body>
