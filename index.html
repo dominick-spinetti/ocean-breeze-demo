@@ -310,7 +310,7 @@
     cxone('guide', 'setButtonSize', '70px');
 
     cxone('guide', 'setOffsetY', '150px');
-//    cxone('chat', 'setOffsetY', '200em');
+    cxone('chat', 'setOffsetY', '200px');
 
     setTimeout(() => {
     cxone('chat', 'setCustomCss', `
@@ -333,10 +333,6 @@
 setTimeout(() => {
   const s = document.createElement('style');
   s.innerHTML = `
-
-    #be-frame {
-      bottom: 230px !important;
-    }
     
     /* Focus outline fix */
     #cxone-guide-container [data-selector="GUIDE_CHANNEL_BUTTON"]:focus,
