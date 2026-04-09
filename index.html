@@ -314,8 +314,49 @@
     cxone('guide', 'setDesiredGuideHeight', '600px');
     cxone('guide', 'setButtonSize', '70px');
 
-    setTimeout(() => {
+    // ── Bot/Agent Reply Box Toggle ───────────────────────────────
+    // BOT_USER_IDS: Ocean Breeze bot agentIds from ACD → Users in CXone UserHub.
+    // These are UserHub-visible IDs. Do NOT use payload.data.inboxAssignee.id —
+    // that is an internal system ID not shown anywhere in the UI.
+    // Confirmed via ?cxdebug testing (see README § Bot ID Discovery Logging).
+    var BOT_USER_IDS = [
+      69479938,  // Ocean Breeze (English)
+      69480225,  // Ocean Breeze (Spanish)
+    ];
+    var isBotMode = false;
+
+    // Required to activate the onAnyPushUpdate push stream.
+    // Must be called before onAnyPushUpdate or events will not fire.
+    cxone('chat', 'setAllowedExternalMessageTypes', [
+      'MESSAGE_SENT',
+      'MESSAGE_RECEIVED',
+    ]);
+
+    // ⚠️ Single source of truth for ALL widget CSS.
+    // setCustomCss is a full override — the last call wins and wipes everything prior.
+    // Always call this function instead of calling setCustomCss directly anywhere else.
+    // Adding a new style? Add it here — do not create a separate setCustomCss call.
+    function applyAllChatCss(botMode) {
+      var replyBoxCss = botMode
+        ? `
+            [data-selector="REPLY_BOX"],
+            [data-selector="TEXTAREA"],
+            [data-selector="INPUT"],
+            [data-selector="SEND_BUTTON"] {
+              display: none !important;
+            }
+          `
+        : `
+            [data-selector="REPLY_BOX"],
+            [data-selector="TEXTAREA"],
+            [data-selector="INPUT"],
+            [data-selector="SEND_BUTTON"] {
+              display: revert !important;
+            }
+          `;
+
       cxone('chat', 'setCustomCss', `
+        /* ── Branding ── */
         [data-selector="HEADER"] {
           background-image: url(https://images.contentstack.io/v3/assets/blt440de00c5519ec3c/blt3f612e5958060d18/oceanbreezehotels.svg) !important;
           background-repeat: no-repeat !important;
@@ -327,8 +368,46 @@
           border: 1px solid #0b2438 !important;
           color: #0b2438 !important;
         }
+
+        /* ── Reply box (bot vs. agent) ── */
+        ${replyBoxCss}
       `);
-    }, 1000);
+    }
+
+    // Apply full CSS on load with reply box visible (bot mode off by default).
+    // Delay matches prior behavior — gives the widget frame time to render.
+    setTimeout(() => applyAllChatCss(false), 1000);
+
+    // Re-apply full CSS on every assignee change with updated bot/agent state.
+    cxone('chat', 'onAnyPushUpdate', function(payload) {
+      if (payload?.eventType !== 'CaseInboxAssigneeChanged') return;
+
+      var assigneeUser = payload?.data?.case?.inboxAssigneeUser;
+      // agentId is the UserHub-visible ID (ACD → Users).
+      // inboxAssignee.id is an internal system ID not shown in the UI.
+      var agentId = payload?.data?.inboxAssignee?.agentId;
+
+      var botMode =
+        assigneeUser?.isBotUser === true ||      // primary: reliable flag in payload
+        BOT_USER_IDS.indexOf(agentId) !== -1;   // fallback: UserHub-visible agentId
+
+      if (botMode === isBotMode) return; // No change — skip redundant re-render
+      isBotMode = botMode;
+      applyAllChatCss(isBotMode);
+
+      // ── Debug logging (active only when ?cxdebug is in the URL) ──────────
+      if (window.location.search.includes('cxdebug')) {
+        console.group('[CXone] CaseInboxAssigneeChanged');
+        console.log('  agentId (UserHub-visible):  ', agentId, '  ← use this as BOT_USER_ID');
+        console.log('  inboxAssigneeUser.isBotUser:', assigneeUser?.isBotUser);
+        console.log('  inboxAssigneeUser.firstName:', assigneeUser?.firstName);
+        console.log('  loginUsername:              ', assigneeUser?.loginUsername);
+        console.log('  nickname:                   ', assigneeUser?.nickname);
+        console.log('  ── Full payload ──');
+        console.log(payload);
+        console.groupEnd();
+      }
+    });
 
     setTimeout(() => {
       const s = document.createElement('style');
