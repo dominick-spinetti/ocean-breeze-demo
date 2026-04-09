@@ -46,7 +46,7 @@
       display: flex; align-items: center; gap: 0.4rem;
     }
     .logo span { color: var(--accent); }
-    nav { display: flex; gap: 2rem; }
+    nav { display: flex; gap: 2rem; align-items: center; }
     nav a {
       text-decoration: none; font-size: 0.8rem; font-weight: 500;
       color: var(--primary-lt); text-transform: uppercase; letter-spacing: 1px;
@@ -75,24 +75,57 @@
     }
     .btn-outline:hover { background: rgba(255,255,255,0.15); }
 
+    /* ── LANGUAGE TOGGLE ── */
+    .lang-toggle {
+      display: flex; align-items: center; gap: 0.4rem;
+      background: transparent;
+      border: 1px solid rgba(11,36,56,0.3);
+      border-radius: 3px;
+      padding: 0.25rem 0.65rem;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.68rem; font-weight: 600;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      color: var(--primary);
+      transition: all 0.2s;
+      line-height: 1.6;
+    }
+    .lang-toggle:hover {
+      background: rgba(11,36,56,0.08);
+      border-color: var(--primary);
+    }
+    .lang-toggle .lang-globe { font-size: 0.85rem; line-height: 1; }
+    .lang-toggle .lang-arrow { font-size: 0.55rem; opacity: 0.5; margin-left: 0.1rem; }
+
+    /* ── LANG SWITCH TOAST ── */
+    .lang-toast {
+      position: fixed; bottom: 1.5rem; left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: var(--primary);
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      font-size: 0.72rem; letter-spacing: 1.5px; text-transform: uppercase;
+      padding: 0.6rem 1.4rem; border-radius: 3px;
+      opacity: 0; transition: opacity 0.3s, transform 0.3s;
+      z-index: 9999; pointer-events: none;
+    }
+    .lang-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
     /* ── HERO ── */
     .hero {
       margin-top: 70px;
       position: relative; height: 90vh; min-height: 560px;
       background: linear-gradient(160deg, var(--primary) 0%, #1a4a72 60%, #2a7abf 100%);
-      overflow: hidden;
-      display: flex; align-items: flex-end;
+      overflow: hidden; display: flex; align-items: flex-end;
     }
     .hero-bg {
       position: absolute; inset: 0;
       background-image:
         radial-gradient(ellipse 60% 50% at 70% 40%, rgba(115,175,222,0.25) 0%, transparent 70%),
         radial-gradient(ellipse 40% 60% at 20% 80%, rgba(201,169,110,0.12) 0%, transparent 60%);
-      /* Decorative wave shapes */
     }
     .hero-waves {
-      position: absolute; bottom: 0; left: 0; right: 0; height: 220px;
-      opacity: 0.12;
+      position: absolute; bottom: 0; left: 0; right: 0; height: 220px; opacity: 0.12;
     }
     .hero-content {
       position: relative; z-index: 2;
@@ -101,21 +134,16 @@
     }
     .hero-eyebrow {
       font-size: 0.75rem; font-weight: 500; letter-spacing: 3px;
-      text-transform: uppercase; color: var(--accent);
-      margin-bottom: 1rem;
+      text-transform: uppercase; color: var(--accent); margin-bottom: 1rem;
     }
     .hero h1 {
       font-family: 'Playfair Display', serif;
       font-size: clamp(2.5rem, 6vw, 4.5rem);
       font-weight: 300; color: var(--white);
-      line-height: 1.1; max-width: 700px;
-      margin-bottom: 1.5rem;
+      line-height: 1.1; max-width: 700px; margin-bottom: 1.5rem;
     }
     .hero h1 em { font-style: italic; color: var(--accent); }
-    .hero p {
-      color: rgba(255,255,255,0.75); max-width: 500px;
-      font-size: 1rem; margin-bottom: 2rem;
-    }
+    .hero p { color: rgba(255,255,255,0.75); max-width: 500px; font-size: 1rem; margin-bottom: 2rem; }
     .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
 
     /* ── BOOKING BAR ── */
@@ -139,12 +167,9 @@
       border: 1px solid rgba(11,36,56,0.2);
       border-radius: 4px; font-size: 0.9rem;
       font-family: 'Inter', sans-serif;
-      color: var(--primary); background: #f9f7f4;
-      outline: none;
+      color: var(--primary); background: #f9f7f4; outline: none;
     }
-    .booking-field input:focus, .booking-field select:focus {
-      border-color: var(--accent);
-    }
+    .booking-field input:focus, .booking-field select:focus { border-color: var(--accent); }
 
     /* ── SECTION WRAPPER ── */
     .section { padding: 5rem 2rem; }
@@ -159,24 +184,13 @@
       font-weight: 300; color: var(--primary);
       line-height: 1.2; margin-bottom: 1rem;
     }
-    .section-rule {
-      width: 48px; height: 2px; background: var(--accent);
-      margin: 1.25rem 0;
-    }
-    .section-sub {
-      color: var(--gray); max-width: 560px; font-size: 1rem;
-    }
+    .section-rule { width: 48px; height: 2px; background: var(--accent); margin: 1.25rem 0; }
+    .section-sub { color: var(--gray); max-width: 560px; font-size: 1rem; }
 
-    /* ── INTRO (river block) ── */
+    /* ── INTRO ── */
     .intro { background: #cbe8ee; }
-    .intro-grid {
-      display: grid; grid-template-columns: 3fr 2fr;
-      gap: 5rem; align-items: center;
-    }
-    .intro-img {
-      border-radius: 4px; overflow: hidden;
-      aspect-ratio: 4/3; position: relative;
-    }
+    .intro-grid { display: grid; grid-template-columns: 3fr 2fr; gap: 5rem; align-items: center; }
+    .intro-img { border-radius: 4px; overflow: hidden; aspect-ratio: 4/3; position: relative; }
     .intro-img-placeholder {
       width: 100%; height: 100%;
       background: linear-gradient(135deg, #1a4a72 0%, #2a7abf 50%, #73AFDE 100%);
@@ -186,33 +200,18 @@
 
     /* ── AMENITIES CARDS ── */
     .amenities { background: var(--white); }
-    .cards-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr);
-      gap: 2rem; margin-top: 3rem;
-    }
+    .cards-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 3rem; }
     .card {
-      border: 1px solid rgba(11,36,56,0.08);
-      border-radius: 6px; overflow: hidden;
+      border: 1px solid rgba(11,36,56,0.08); border-radius: 6px; overflow: hidden;
       transition: transform 0.3s, box-shadow 0.3s;
     }
-    .card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 32px rgba(11,36,56,0.1);
-    }
-    .card-img {
-      height: 180px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 3rem;
-    }
-    .card-img.pool  { background: linear-gradient(135deg, #1a4a72, #73AFDE); }
-    .card-img.golf  { background: linear-gradient(135deg, #2d6a4f, #52b788); }
-    .card-img.spa   { background: linear-gradient(135deg, #6b4226, #c9a96e); }
+    .card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(11,36,56,0.1); }
+    .card-img { height: 180px; display: flex; align-items: center; justify-content: center; font-size: 3rem; }
+    .card-img.pool { background: linear-gradient(135deg, #1a4a72, #73AFDE); }
+    .card-img.golf { background: linear-gradient(135deg, #2d6a4f, #52b788); }
+    .card-img.spa  { background: linear-gradient(135deg, #6b4226, #c9a96e); }
     .card-body { padding: 1.5rem; }
-    .card-body h3 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.2rem; font-weight: 600;
-      color: var(--primary); margin-bottom: 0.5rem;
-    }
+    .card-body h3 { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 600; color: var(--primary); margin-bottom: 0.5rem; }
     .card-body p { color: var(--gray); font-size: 0.9rem; line-height: 1.6; }
 
     /* ── TESTIMONIAL ── */
@@ -230,37 +229,21 @@
     .quote-author { color: var(--accent); font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; }
 
     /* ── FOOTER ── */
-    footer {
-      background: linear-gradient(to right, var(--primary), var(--primary-md));
-      color: var(--white);
-    }
+    footer { background: linear-gradient(to right, var(--primary), var(--primary-md)); color: var(--white); }
     .footer-main {
       max-width: 1200px; margin: 0 auto;
       padding: 3.5rem 2rem 2rem;
-      display: flex; justify-content: space-between;
-      gap: 3rem; flex-wrap: wrap;
+      display: flex; justify-content: space-between; gap: 3rem; flex-wrap: wrap;
     }
     .footer-brand .logo { color: var(--white); margin-bottom: 1rem; }
     .footer-brand p { color: rgba(255,255,255,0.5); font-size: 0.85rem; max-width: 240px; }
-    .footer-links h4 {
-      font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase;
-      color: var(--accent); margin-bottom: 1rem;
-    }
-    .footer-links a {
-      display: block; text-decoration: none;
-      color: rgba(255,255,255,0.65); font-size: 0.85rem;
-      margin-bottom: 0.5rem; transition: color 0.2s;
-    }
+    .footer-links h4 { font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; }
+    .footer-links a { display: block; text-decoration: none; color: rgba(255,255,255,0.65); font-size: 0.85rem; margin-bottom: 0.5rem; transition: color 0.2s; }
     .footer-links a:hover { color: var(--white); }
-    .footer-contact a {
-      display: flex; align-items: center; gap: 0.5rem;
-      text-decoration: none; color: rgba(255,255,255,0.65);
-      font-size: 0.85rem; margin-bottom: 0.75rem; transition: color 0.2s;
-    }
+    .footer-contact a { display: flex; align-items: center; gap: 0.5rem; text-decoration: none; color: rgba(255,255,255,0.65); font-size: 0.85rem; margin-bottom: 0.75rem; transition: color 0.2s; }
     .footer-contact a:hover { color: var(--white); }
     .footer-bottom {
-      background: #061F33;
-      padding: 1rem 2rem; text-align: center;
+      background: #061F33; padding: 1rem 2rem; text-align: center;
       font-size: 0.75rem; color: rgba(255,255,255,0.35);
       display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;
     }
@@ -275,10 +258,37 @@
     }
   </style>
 
-  <!-- ═══════════════════════════════════════════
-       CXone Chat Widget — replace BU number below
-  ════════════════════════════════════════════ -->
   <script>
+    // ─────────────────────────────────────────────────────────────
+    // LANGUAGE SWITCHING LOGIC
+    // Reads saved locale from localStorage (defaults to en-US).
+    // On toggle: updates all three CXone calls, saves to storage,
+    // then reloads so the routing variable takes effect in Studio.
+    // ─────────────────────────────────────────────────────────────
+    const LOCALE_KEY = 'oceanbreeeze_locale';
+    const savedLocale = localStorage.getItem(LOCALE_KEY) || 'en-US';
+    const isSpanish = savedLocale === 'es-ES';
+
+    document.documentElement.lang = isSpanish ? 'es' : 'en';
+
+    function switchLanguage() {
+      const nextLocale = isSpanish ? 'en-US' : 'es-ES';
+      localStorage.setItem(LOCALE_KEY, nextLocale);
+
+      // 1. Reinitialize Guide with new locale
+      cxone('guide', 'init', { locale: nextLocale });
+
+      // 2. Update widget display locale
+      cxone('chat', 'setLocale', nextLocale);
+
+      // 3. Update Studio routing variable
+      cxone('chat', 'setContactCustomField', 'new_lang', nextLocale);
+
+      // 4. Reload so the routing variable takes effect on next contact
+      window.location.reload();
+    }
+
+    // ── CXone SDK Bootstrap ──────────────────────────────────────
     (function(n,u){
       window.CXoneDfo=n,
       window[n]=window[n]||function(){(window[n].q=window[n].q||[]).push(arguments)},
@@ -289,66 +299,56 @@
       document.head.appendChild(e);
     })('cxone','https://web-modules-de-na1.niceincontact.com/loader/1/loader.js');
 
-    cxone('init', '5748'); // ← replace
-    cxone('guide','init');
-
-    // cxone('guide', 'init', { locale: 'es-US' });
-    // cxone('chat', 'setLocale', 'es-US');
-
-    
-    cxone('chat', 'hideAssignedAgent');
-    cxone('chat', 'enableCloseIcon', true);
+    // ── Init with saved locale ───────────────────────────────────
+    cxone('init', '5748');
+    cxone('guide', 'init', { locale: savedLocale });              // 1. Bootstrap Guide with locale first
+    cxone('chat', 'setLocale', savedLocale);                      // 2. Set widget UI locale
+    cxone('chat', 'setContactCustomField', 'new_lang', savedLocale); // 3. Set Studio routing variable
 
     cxone('chat', 'hideAssignedAgent');
     cxone('chat', 'enableCloseIcon', true);
     cxone('chat', 'setCustomerName', 'Benny Goodman');
     cxone('chat', 'setContactCustomField', 'email', 'bgooodman@email.com');
     cxone('chat', 'setContactCustomField', 'phone', '4801231234');
-    cxone('chat', 'setContactCustomField', 'new_lang', 'en-US');
     cxone('guide', 'setDesiredGuideWidth', '400px');
     cxone('guide', 'setDesiredGuideHeight', '600px');
     cxone('guide', 'setButtonSize', '70px');
 
-    // cxone('guide', 'setOffsetY', '150px');
-    // cxone('chat', 'setOffsetY', '200px');
-
     setTimeout(() => {
-    cxone('chat', 'setCustomCss', `
+      cxone('chat', 'setCustomCss', `
         [data-selector="HEADER"] {
-            background-image: url(https://images.contentstack.io/v3/assets/blt440de00c5519ec3c/blt3f612e5958060d18/oceanbreezehotels.svg) !important;
-            background-repeat: no-repeat !important;
-            background-size: 20% !important;
-            background-position: left 10px center !important;
-            height: 80px !important;
+          background-image: url(https://images.contentstack.io/v3/assets/blt440de00c5519ec3c/blt3f612e5958060d18/oceanbreezehotels.svg) !important;
+          background-repeat: no-repeat !important;
+          background-size: 20% !important;
+          background-position: left 10px center !important;
+          height: 80px !important;
         }
         [data-selector="TEXT_BUTTON"] {
-            border: 1px solid #0b2438 !important;
-            color: #0b2438 !important;
+          border: 1px solid #0b2438 !important;
+          color: #0b2438 !important;
         }
+      `);
+    }, 1000);
 
-    `);
-}, 1000);
-
-
-setTimeout(() => {
-  const s = document.createElement('style');
-  s.innerHTML = `
-    
-    /* Focus outline fix */
-    #cxone-guide-container [data-selector="GUIDE_CHANNEL_BUTTON"]:focus,
-    #cxone-guide-container [data-selector="GUIDE_CHANNEL_BUTTON"]:focus-visible {
-      outline-color: #26587f !important;
-      outline-width: 0.2em !important;
-      outline-style: solid !important;
-      outline-offset: 0px !important;
-    }
-  `;
-  document.head.appendChild(s);
-}, 1000);
-    
+    setTimeout(() => {
+      const s = document.createElement('style');
+      s.innerHTML = `
+        #cxone-guide-container [data-selector="GUIDE_CHANNEL_BUTTON"]:focus,
+        #cxone-guide-container [data-selector="GUIDE_CHANNEL_BUTTON"]:focus-visible {
+          outline-color: #26587f !important;
+          outline-width: 0.2em !important;
+          outline-style: solid !important;
+          outline-offset: 0px !important;
+        }
+      `;
+      document.head.appendChild(s);
+    }, 1000);
   </script>
 </head>
 <body>
+
+  <!-- Toast notification -->
+  <div class="lang-toast" id="langToast"></div>
 
   <!-- HEADER -->
   <header>
@@ -360,6 +360,13 @@ setTimeout(() => {
         <a href="#">Experiences</a>
         <a href="#">Dining</a>
         <a href="#">Contact</a>
+
+        <!-- ── LANGUAGE TOGGLE ── -->
+        <button class="lang-toggle" id="langToggle" onclick="switchLanguage()" title="Switch language / Cambiar idioma">
+          <span class="lang-globe">🌐</span>
+          <span id="langLabel"></span>
+          <span class="lang-arrow">▼</span>
+        </button>
       </nav>
       <a href="#" class="btn btn-primary">Book Now</a>
     </div>
@@ -420,7 +427,6 @@ setTimeout(() => {
       </div>
       <div class="intro-img">
         <div class="intro-img-placeholder">
-          <!-- Simple SVG pool scene placeholder -->
           <svg class="pool-svg" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
             <ellipse cx="200" cy="200" rx="160" ry="60" fill="rgba(255,255,255,0.15)" stroke="rgba(255,255,255,0.4)" stroke-width="2"/>
             <ellipse cx="200" cy="190" rx="140" ry="50" fill="rgba(115,175,222,0.3)" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
@@ -514,6 +520,31 @@ setTimeout(() => {
       <span>© 2026 Ocean Breeze Hotels. All rights reserved.</span>
     </div>
   </footer>
+
+  <script>
+    // ── Set toggle label to reflect current locale on load ──────
+    document.getElementById('langLabel').textContent = isSpanish ? 'ES' : 'EN';
+
+    // ── Brief toast to confirm language after reload ────────────
+    const toast = document.getElementById('langToast');
+    const justSwitched = sessionStorage.getItem('lang_switched');
+
+    if (justSwitched) {
+      sessionStorage.removeItem('lang_switched');
+      toast.textContent = isSpanish
+        ? '🌐 Idioma cambiado a Español'
+        : '🌐 Language switched to English';
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 3000);
+    }
+
+    // Mark that a switch happened so the toast fires after reload
+    const origSwitch = switchLanguage;
+    window.switchLanguage = function() {
+      sessionStorage.setItem('lang_switched', '1');
+      origSwitch();
+    };
+  </script>
 
 </body>
 </html>
